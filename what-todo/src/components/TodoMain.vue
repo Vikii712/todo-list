@@ -6,9 +6,11 @@ import Pagination from "./main/Pagination.vue";
 </script>
 
 <template>
-  <AddTodo />
-  <TodoList />
-  <Pagination />
+  <main class="main bg-neutral-600 p-5 rounded-md" >
+    <AddTodo />
+    <TodoList />
+    <Pagination />
+  </main>
 </template>
 
 <style scoped>
