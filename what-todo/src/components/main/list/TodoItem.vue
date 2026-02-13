@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { TrashIcon, PencilIcon} from '@heroicons/vue/24/outline'
+
+const props = defineProps({
+  title: String,
+})
+
 </script>
 
 <template>
@@ -10,7 +15,7 @@ import { TrashIcon, PencilIcon} from '@heroicons/vue/24/outline'
     <input type="checkbox" id="checkbox" name="checkbox" class="w-5 h-5"/>
 
     <!-- Task title -->
-    <p class="col-span-9">Do the first thing on this list</p>
+    <p class="col-span-9">{{props.title}}</p>
 
     <!-- Edit button -->
     <button class="col-span-1 rounded-md py-3 flex flex-col items-center justify-center

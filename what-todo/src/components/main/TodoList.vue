@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import TodoItem from "./list/TodoItem.vue";
+import { useTodoStore } from "../../stores/todo.ts";
+import {onMounted} from "vue";
+
+const todoStore = useTodoStore();
+
+onMounted(() => {
+  todoStore.fetchTodos()
+})
+
 </script>
 
 <template>
@@ -15,8 +24,9 @@ import TodoItem from "./list/TodoItem.vue";
     <!-- List items -->
     <ul class="mt-3 space-y-3">
       <TodoItem
-          v-for="n in 4"
-          :key="n"
+          v-for="todo in todoStore.todos"
+          :title="todo.title"
+          :key="todo.id"
       />
     </ul>
 
