@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import axios from 'axios'
 
-interface Todo {
+export interface Todo {
     userId : number
     id : number
     title : string
@@ -54,10 +54,20 @@ export const useTodoStore = defineStore('todos', () => {
         }
     }
 
+    //toggle task completion by inverting its value
+    function toggleCompleted(id:number):void {
+
+        const todo = todos.value.find(t=>t.id === id)
+        if(todo){
+            todo.completed = !todo.completed
+        }
+    }
+
     return{
         todos,
         error,
         loading,
         loadTodos,
+        toggleCompleted,
     }
 })
