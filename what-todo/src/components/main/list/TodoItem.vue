@@ -4,6 +4,7 @@ import type {PropType} from "vue";
 import type {Todo} from "../../../stores/todo.ts"
 import {useTodoStore} from "../../../stores/todo.ts"
 import {ref} from "vue"
+import DeleteModal from "./DeleteModal.vue"
 
 
 const props = defineProps({
@@ -16,6 +17,7 @@ const props = defineProps({
 const todoStore = useTodoStore();
 const isEditing = ref(false);
 const newTitle = ref(props.todo.title);
+const deleteModal = ref(false)
 
 function toggleEdit(): void {
   if (isEditing.value) {
@@ -28,6 +30,12 @@ function toggleEdit(): void {
 </script>
 
 <template>
+
+  <DeleteModal v-if="deleteModal"
+               :todoId="props.todo.id"
+               @close="deleteModal = false"
+  />
+
   <li class="px-3 py-1 grid grid-cols-12 items-center
               bg-neutral-200 rounded-md text-start text-black">
 
@@ -74,7 +82,7 @@ function toggleEdit(): void {
     <button class="col-span-1 rounded-md py-3 flex
                   flex-col items-center justify-center
                 hover:bg-neutral-300"
-            @click="todoStore.deleteTodo(props.todo.id)"
+            @click="deleteModal = true"
     >
       <TrashIcon class="w-5 h-5"></TrashIcon>
     </button>
