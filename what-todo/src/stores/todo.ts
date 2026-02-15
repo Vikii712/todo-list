@@ -18,14 +18,18 @@ export const useTodoStore = defineStore('todos', () => {
 
     //filter todos according to selected filter option (all/completed/uncompleted)
     //computed - list changes if the original task list changes
+    //sorted from the newest task (on top) to the oldest
     const selectedTodos = computed(() => {
+        let filtered = todos.value
+
         if (filter.value === 'completed') {
-            return todos.value.filter(t => t.completed)
+            filtered = todos.value.filter(t => t.completed)
         } else if (filter.value === 'uncompleted') {
-            return todos.value.filter(t => !t.completed)
-        } else {
-            return todos.value
+            filtered = todos.value.filter(t => !t.completed)
         }
+
+        return filtered.slice()
+            .sort((a, b) => b.id - a.id)
     })
 
     //sync the localstorage when the task list changes
@@ -95,6 +99,25 @@ export const useTodoStore = defineStore('todos', () => {
         }
     }
 
+    //adding new task to task list
+    function addTodo( newTitle: string):void {
+
+        const usersId = 1
+
+        //find the highest id so the values stay unique
+        //if there are no tasks, use id equal to 0
+        const maxId = todos.value.length ? Math.max(...todos.value.map(t => t.id)) : 0
+
+        const newTodo: Todo = {
+            userId: usersId,
+            id: maxId + 1,
+            title: newTitle,
+            completed: false
+        }
+
+        todos.value.push(newTodo)
+    }
+
     return{
         todos,
         error,
@@ -105,5 +128,6 @@ export const useTodoStore = defineStore('todos', () => {
         selectedTodos,
         deleteTodo,
         updateTodo,
+        addTodo,
     }
 })
