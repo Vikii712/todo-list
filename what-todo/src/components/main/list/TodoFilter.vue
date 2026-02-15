@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import { useTodoStore } from "../../../stores/todo.ts";
 
-const filter = ref<'all' | 'completed' | 'uncompleted'>('all')
+const todoStore = useTodoStore();
 </script>
 
 <template>
@@ -12,40 +12,40 @@ const filter = ref<'all' | 'completed' | 'uncompleted'>('all')
 
       <!--All tasks -->
       <label class="flex items-center px-2 py-1 rounded-md"
-             :class="filter === 'all' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
+             :class="todoStore.filter === 'all' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
       >
         <input type="radio"
                name="filter"
                class="appearance-none"
                value="all"
-               v-model="filter"
+               v-model="todoStore.filter"
         />
         <span>All</span>
       </label>
 
       <!-- Completed tasks only -->
       <label class="flex items-center px-2 py-1 rounded-md"
-             :class="filter === 'completed' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
+             :class="todoStore.filter === 'completed' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
 
       >
         <input type="radio"
                name="filter"
                class="appearance-none"
                value="completed"
-               v-model="filter"
+               v-model="todoStore.filter"
         />
         <span>Completed</span>
       </label>
 
       <!-- Uncompleted tasks only -->
       <label class="flex items-center px-2 py-1 rounded-md"
-             :class="filter === 'uncompleted' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
+             :class="todoStore.filter === 'uncompleted' ? 'text-black bg-neutral-200': 'text-neutral-200 bg-none' "
       >
         <input type="radio"
                name="filter"
                class="appearance-none"
                value="uncompleted"
-               v-model="filter"
+               v-model="todoStore.filter"
         />
         <span>Uncompleted</span>
       </label>

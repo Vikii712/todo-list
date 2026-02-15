@@ -24,7 +24,7 @@ onMounted(() => {
     <!-- List items -->
     <ul class="mt-3 space-y-3">
       <TodoItem
-          v-for="todo in todoStore.todos"
+          v-for="todo in todoStore.selectedTodos"
           :todo="todo"
           :key="todo.id"
       />

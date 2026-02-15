@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref, watch,computed } from 'vue'
 import axios from 'axios'
 
 export interface Todo {
@@ -13,6 +13,20 @@ export const useTodoStore = defineStore('todos', () => {
     const loading  = ref<boolean>(false)
     const todos = ref<Todo[]>([])
     const error = ref<string|null>(null)
+    const filter = ref<'all' | 'completed' | 'uncompleted'>('all')
+
+
+    //filter todos according to selected filter option (all/completed/uncompleted)
+    //computed - list changes if the original task list changes
+    const selectedTodos = computed(() => {
+        if (filter.value === 'completed') {
+            return todos.value.filter(t => t.completed)
+        } else if (filter.value === 'uncompleted') {
+            return todos.value.filter(t => !t.completed)
+        } else {
+            return todos.value
+        }
+    })
 
     //sync the localstorage when the task list changes
     //deep: true -> nested objects are also watched
@@ -69,5 +83,7 @@ export const useTodoStore = defineStore('todos', () => {
         loading,
         loadTodos,
         toggleCompleted,
+        filter,
+        selectedTodos,
     }
 })
