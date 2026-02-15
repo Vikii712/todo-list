@@ -7,6 +7,7 @@ const newTitle = ref('');
 
 //clear input when new task is added, prevents adding empty task
 function addTodo(){
+  newTitle.value = newTitle.value.trim();
   if(newTitle.value !== ''){
     todoStore.addTodo(newTitle.value)
   }
@@ -36,6 +37,7 @@ function addTodo(){
              class="bg-neutral-200 px-3 py-2 text-black
                       rounded-md w-full"
              placeholder="Add new task..."
+             maxlength="200"
       />
 
       <!-- Add button, cannot -->

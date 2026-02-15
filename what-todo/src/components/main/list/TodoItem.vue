@@ -6,7 +6,6 @@ import {useTodoStore} from "../../../stores/todo.ts"
 import {ref} from "vue"
 import DeleteModal from "./DeleteModal.vue"
 
-
 const props = defineProps({
   todo: {
     type: Object as PropType<Todo>,
@@ -36,6 +35,12 @@ function toggleEdit(): void {
   isEditing.value = !isEditing.value;
 }
 
+function escapeEdit(): void {
+  isEditing.value = false
+  newTitle.value = props.todo.title
+  error.value = ''
+}
+
 </script>
 
 <template>
@@ -46,7 +51,7 @@ function toggleEdit(): void {
   />
 
   <li class="px-3 py-1 grid grid-cols-7 sm:grid-cols-12 items-center
-              bg-neutral-200 rounded-md text-start text-black">
+              bg-neutral-200 rounded-md text-start text-black min-w-0">
 
     <!-- Checkbox, toggles task completion -->
     <input
@@ -60,7 +65,7 @@ function toggleEdit(): void {
 
     <!-- Task title, crossed out if completed -->
     <!-- Start editing by double clicking the text -->
-    <p class="col-span-4 sm:col-span-9"
+    <p class="col-span-4 sm:col-span-9 break-words min-w-0"
        :class="props.todo.completed ? 'line-through' : ''"
        v-if="!isEditing"
        @dblclick="toggleEdit()"
@@ -75,6 +80,8 @@ function toggleEdit(): void {
               v-model="newTitle"
               class="border px-1 rounded col-span-4 sm:col-span-9 resize-y"
               @keyup.enter="toggleEdit"
+              @keyup.esc="escapeEdit"
+              maxlength="200"
     />
 
     <!-- Edit button -->
