@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 
 interface Todo {
@@ -14,9 +14,32 @@ export const useTodoStore = defineStore('todos', () => {
     const todos = ref<Todo[]>([])
     const error = ref<string|null>(null)
 
+    //sync the localstorage when the task list changes
+    //deep: true -> nested objects are also watched
+    watch(todos,(newTodos) => {
+        localStorage.setItem('todos', JSON.stringify(newTodos))
+    },{deep: true})
+
+
+    //load task list from localStorage or fetch from api (if not available in localStorage)
+    async function loadTodos(): Promise<void> {
+        loading.value = true
+        const storedTodos = localStorage.getItem('todos')
+
+        // localStorage.getItem returns null if empty, then fetch the data
+        if (storedTodos) {
+            todos.value = JSON.parse(storedTodos)
+        }else{
+            await fetchTodos()
+        }
+
+        loading.value = false
+    }
+
+    //fetch todos from jsonplaceholder api
+    //store errors for UI or set the task list
     async function fetchTodos (): Promise<void> {
         error.value = null
-        loading.value = true
 
         try{
             const response = await axios.get<Todo[]>(
@@ -30,10 +53,11 @@ export const useTodoStore = defineStore('todos', () => {
             loading.value = false
         }
     }
+
     return{
         todos,
         error,
         loading,
-        fetchTodos,
+        loadTodos,
     }
 })

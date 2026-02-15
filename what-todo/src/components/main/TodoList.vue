@@ -6,7 +6,7 @@ import {onMounted} from "vue";
 const todoStore = useTodoStore();
 
 onMounted(() => {
-  todoStore.fetchTodos()
+  todoStore.loadTodos()
 })
 
 </script>
