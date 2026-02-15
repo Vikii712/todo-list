@@ -19,6 +19,7 @@ const todoStore = useTodoStore();
                class="appearance-none"
                value="all"
                v-model="todoStore.filter"
+               :disabled="todoStore.loading"
         />
         <span>All</span>
       </label>
@@ -33,6 +34,8 @@ const todoStore = useTodoStore();
                class="appearance-none"
                value="completed"
                v-model="todoStore.filter"
+               :disabled="todoStore.loading"
+
         />
         <span>Completed</span>
       </label>
@@ -46,6 +49,8 @@ const todoStore = useTodoStore();
                class="appearance-none"
                value="uncompleted"
                v-model="todoStore.filter"
+               :disabled="todoStore.loading"
+
         />
         <span>Uncompleted</span>
       </label>
