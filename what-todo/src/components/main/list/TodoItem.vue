@@ -36,7 +36,7 @@ function toggleEdit(): void {
                @close="deleteModal = false"
   />
 
-  <li class="px-3 py-1 grid grid-cols-12 items-center
+  <li class="px-3 py-1 grid grid-cols-7 sm:grid-cols-12 items-center
               bg-neutral-200 rounded-md text-start text-black">
 
     <!-- Checkbox, toggles task completion -->
@@ -51,7 +51,7 @@ function toggleEdit(): void {
 
     <!-- Task title, crossed out if completed -->
     <!-- Start editing by double clicking the text -->
-    <p class="col-span-9"
+    <p class="col-span-4 sm:col-span-9"
        :class="props.todo.completed ? 'line-through' : ''"
        v-if="!isEditing"
        @dblclick="toggleEdit()"
@@ -69,7 +69,7 @@ function toggleEdit(): void {
     />
 
     <!-- Edit button -->
-    <button class="col-span-1 rounded-md py-3 flex
+    <button class="rounded-md py-3 flex
                    flex-col items-center justify-center
                  hover:bg-neutral-300"
                    @click="toggleEdit"
@@ -79,7 +79,7 @@ function toggleEdit(): void {
     </button>
 
     <!-- Delete button -->
-    <button class="col-span-1 rounded-md py-3 flex
+    <button class="rounded-md py-3 flex
                   flex-col items-center justify-center
                 hover:bg-neutral-300"
             @click="deleteModal = true"

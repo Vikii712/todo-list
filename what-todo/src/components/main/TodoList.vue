@@ -8,11 +8,11 @@ const todoStore = useTodoStore();
 </script>
 
 <template>
-  <section class="container mx-auto px-4">
+  <section class="px-4">
 
     <!-- Header for the list -->
-    <div class="grid grid-cols-12 mx-3">
-      <span class="col-span-10 text-start">Task</span>
+    <div class="grid grid-cols-7 sm:grid-cols-12 mx-3">
+      <span class="col-span-5 sm:col-span-10 text-start">Task</span>
       <span>Edit</span>
       <span>Delete</span>
     </div>

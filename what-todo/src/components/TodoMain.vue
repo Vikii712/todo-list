@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="main bg-neutral-600 p-5 rounded-md" >
+  <main class="main container mx-auto bg-neutral-600 p-5 rounded-md" >
     <AddTodo />
     <TodoStats />
     <TodoFilter/>
