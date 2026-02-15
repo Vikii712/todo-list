@@ -18,9 +18,18 @@ const todoStore = useTodoStore();
 const isEditing = ref(false);
 const newTitle = ref(props.todo.title);
 const deleteModal = ref(false)
+const error = ref('')
 
 function toggleEdit(): void {
   if (isEditing.value) {
+    error.value = ''
+    newTitle.value = newTitle.value.trim()
+
+    if(newTitle.value === '') {
+      error.value = 'Title cannot be empty'
+      return
+    }
+
     todoStore.updateTodo(props.todo.id, newTitle.value)
   }
 
@@ -64,7 +73,7 @@ function toggleEdit(): void {
     <input v-else
               type="text"
               v-model="newTitle"
-              class="border px-1 rounded col-span-9 resize-y"
+              class="border px-1 rounded col-span-4 sm:col-span-9 resize-y"
               @keyup.enter="toggleEdit"
     />
 
@@ -88,6 +97,10 @@ function toggleEdit(): void {
     </button>
 
   </li>
+
+  <p v-if="error" class="text-red-200 text-xs mt-1">
+    {{ error }}
+  </p>
 </template>
 
 <style scoped>

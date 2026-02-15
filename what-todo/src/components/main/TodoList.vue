@@ -32,7 +32,9 @@ const todoStore = useTodoStore();
           :key="todo.id"
       />
     </ul>
-    <p v-else class="text-neutral-400"> No more tasks for today! </p>
+    <p v-else-if="!todoStore.error" class="text-neutral-400"> No more tasks for today! </p>
+
+    <p v-else class="text-red-200 pt-8">!! {{ todoStore.error}} !!</p>
 
   </section>
 </template>
