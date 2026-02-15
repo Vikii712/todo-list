@@ -186,7 +186,6 @@ export const useTodoStore = defineStore('todos', () => {
         prevPage,
         currentPage,
         totalPages,
-
         totalTodos,
         completedTodos,
         completedPercent,

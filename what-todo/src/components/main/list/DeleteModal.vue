@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {useTodoStore} from "../../../stores/todo.ts"
-import { defineProps, defineEmits } from 'vue'
 
 
 const todoStore = useTodoStore()
