@@ -77,6 +77,15 @@ export const useTodoStore = defineStore('todos', () => {
         }
     }
 
+    //deletes selected task from task list if found
+    //in-place modification instead of rewriting the whole array
+    function deleteTodo(id:number):void {
+        const index = todos.value.findIndex(t => t.id === id)
+        if(index !== -1){
+            todos.value.splice(index, 1)
+        }
+    }
+
     return{
         todos,
         error,
@@ -85,5 +94,6 @@ export const useTodoStore = defineStore('todos', () => {
         toggleCompleted,
         filter,
         selectedTodos,
+        deleteTodo,
     }
 })

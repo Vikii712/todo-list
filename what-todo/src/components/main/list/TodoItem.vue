@@ -43,8 +43,11 @@ const todoStore = useTodoStore();
     </button>
 
     <!-- Delete button -->
-    <button class="col-span-1 rounded-md py-3 flex flex-col items-center justify-center
-                hover:bg-neutral-300">
+    <button class="col-span-1 rounded-md py-3 flex
+                  flex-col items-center justify-center
+                hover:bg-neutral-300"
+            @click="todoStore.deleteTodo(props.todo.id)"
+    >
       <TrashIcon class="w-5 h-5"></TrashIcon>
     </button>
 
