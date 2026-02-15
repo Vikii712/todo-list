@@ -14,7 +14,8 @@ export const useTodoStore = defineStore('todos', () => {
     const todos = ref<Todo[]>([])
     const error = ref<string|null>(null)
     const filter = ref<'all' | 'completed' | 'uncompleted'>('all')
-
+    const currentPage = ref(1)
+    const perPage = 20
 
     //filter todos according to selected filter option (all/completed/uncompleted)
     //computed - list changes if the original task list changes
@@ -32,11 +33,51 @@ export const useTodoStore = defineStore('todos', () => {
             .sort((a, b) => b.id - a.id)
     })
 
+    //when the filter is switched, we need to show the newest tasks (page 1)
+    //leaving nonexistent page index can lead to no tasks shown
+    watch(filter, () => {
+        currentPage.value = 1
+    })
+
     //sync the localstorage when the task list changes
     //deep: true -> nested objects are also watched
     watch(todos,(newTodos) => {
         localStorage.setItem('todos', JSON.stringify(newTodos))
     },{deep: true})
+
+
+
+    //maximum page number for current filter selected
+    const totalPages = computed(() => {
+        return Math.max(1 , Math.ceil(selectedTodos.value.length / perPage))
+    })
+
+    //if everything is deleted from current page, we need to go one page back
+    watch(totalPages,(maxPages) => {
+        if (currentPage.value > maxPages) {
+            currentPage.value = maxPages
+        }
+    })
+
+    //tasks that should be shown for currently selected page and filter
+    const pageTodos = computed(() => {
+        const start = (currentPage.value - 1) * perPage
+        const end = start + perPage
+        console.log("haha:", selectedTodos.value.slice(start, end))
+        return selectedTodos.value.slice(start, end)
+    })
+
+    function nextPage(){
+        if (currentPage.value < totalPages.value) {
+            currentPage.value++
+        }
+    }
+
+    function prevPage(){
+        if (currentPage.value > 1) {
+            currentPage.value--
+        }
+    }
 
 
     //load task list from localStorage or fetch from api (if not available in localStorage)
@@ -129,5 +170,10 @@ export const useTodoStore = defineStore('todos', () => {
         deleteTodo,
         updateTodo,
         addTodo,
+        pageTodos,
+        nextPage,
+        prevPage,
+        currentPage,
+        totalPages
     }
 })

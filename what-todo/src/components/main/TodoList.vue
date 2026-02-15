@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import TodoItem from "./list/TodoItem.vue";
 import { useTodoStore } from "../../stores/todo.ts";
-import {onMounted} from "vue";
 
 const todoStore = useTodoStore();
-
-onMounted(() => {
-  todoStore.loadTodos()
-})
 
 </script>
 
@@ -22,13 +17,14 @@ onMounted(() => {
     </div>
 
     <!-- List items -->
-    <ul class="mt-3 space-y-3">
+    <ul v-if="todoStore.pageTodos.length !== 0" class="mt-3 space-y-3">
       <TodoItem
-          v-for="todo in todoStore.selectedTodos"
+          v-for="todo in todoStore.pageTodos"
           :todo="todo"
           :key="todo.id"
       />
     </ul>
+    <p v-else class="text-neutral-400"> No more tasks for today! </p>
 
   </section>
 </template>

@@ -4,6 +4,14 @@ import AddTodo from "./main/AddTodo.vue";
 import TodoList from "./main/TodoList.vue";
 import Pagination from "./main/Pagination.vue";
 import TodoFilter from "./main/list/TodoFilter.vue";
+import {onMounted} from "vue";
+import { useTodoStore } from "../stores/todo.ts";
+
+const todoStore = useTodoStore();
+
+onMounted(() => {
+  todoStore.loadTodos()
+})
 </script>
 
 <template>
