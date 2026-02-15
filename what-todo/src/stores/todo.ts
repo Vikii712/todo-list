@@ -17,6 +17,18 @@ export const useTodoStore = defineStore('todos', () => {
     const currentPage = ref(1)
     const perPage = 20
 
+    //stats of completed task - total number, completed and percentual representation
+    const totalTodos = computed(() =>
+        todos.value.length
+    )
+    const completedTodos = computed(() =>
+        todos.value.filter(t  => t.completed).length
+    )
+    const completedPercent = computed(() => {
+        if (totalTodos.value === 0) return 0
+        return Math.round((completedTodos.value / totalTodos.value) * 100)
+    })
+
     //filter todos according to selected filter option (all/completed/uncompleted)
     //computed - list changes if the original task list changes
     //sorted from the newest task (on top) to the oldest
@@ -173,6 +185,10 @@ export const useTodoStore = defineStore('todos', () => {
         nextPage,
         prevPage,
         currentPage,
-        totalPages
+        totalPages,
+
+        totalTodos,
+        completedTodos,
+        completedPercent,
     }
 })

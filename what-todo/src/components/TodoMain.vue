@@ -6,6 +6,7 @@ import Pagination from "./main/Pagination.vue";
 import TodoFilter from "./main/list/TodoFilter.vue";
 import {onMounted} from "vue";
 import { useTodoStore } from "../stores/todo.ts";
+import TodoStats from "./main/TodoStats.vue";
 
 const todoStore = useTodoStore();
 
@@ -17,6 +18,7 @@ onMounted(() => {
 <template>
   <main class="main bg-neutral-600 p-5 rounded-md" >
     <AddTodo />
+    <TodoStats />
     <TodoFilter/>
     <TodoList />
     <Pagination />
