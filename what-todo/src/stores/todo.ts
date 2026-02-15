@@ -77,12 +77,21 @@ export const useTodoStore = defineStore('todos', () => {
         }
     }
 
-    //deletes selected task from task list if found
+    //delete selected task from task list if found
     //in-place modification instead of rewriting the whole array
     function deleteTodo(id:number):void {
         const index = todos.value.findIndex(t => t.id === id)
         if(index !== -1){
             todos.value.splice(index, 1)
+        }
+    }
+
+    //rename task, called by double-clicking title or pressing the edit button
+    //in-place modification instead of rewriting the whole array
+    function updateTodo(id:number, newTitle: string):void {
+        const todo = todos.value.find(t => t.id === id)
+        if(todo){
+            todo.title = newTitle
         }
     }
 
@@ -95,5 +104,6 @@ export const useTodoStore = defineStore('todos', () => {
         filter,
         selectedTodos,
         deleteTodo,
+        updateTodo,
     }
 })

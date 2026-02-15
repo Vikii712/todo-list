@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { TrashIcon, PencilIcon} from '@heroicons/vue/24/outline'
+import { TrashIcon, PencilIcon, CheckIcon} from '@heroicons/vue/24/outline'
 import type {PropType} from "vue";
 import type {Todo} from "../../../stores/todo.ts"
 import {useTodoStore} from "../../../stores/todo.ts"
+import {ref} from "vue"
 
 
 const props = defineProps({
@@ -13,6 +14,17 @@ const props = defineProps({
 })
 
 const todoStore = useTodoStore();
+const isEditing = ref(false);
+const newTitle = ref(props.todo.title);
+
+function toggleEdit(): void {
+  if (isEditing.value) {
+    todoStore.updateTodo(props.todo.id, newTitle.value)
+  }
+
+  isEditing.value = !isEditing.value;
+}
+
 </script>
 
 <template>
@@ -30,16 +42,32 @@ const todoStore = useTodoStore();
     />
 
     <!-- Task title, crossed out if completed -->
+    <!-- Start editing by double clicking the text -->
     <p class="col-span-9"
        :class="props.todo.completed ? 'line-through' : ''"
+       v-if="!isEditing"
+       @dblclick="toggleEdit()"
     >
       {{props.todo.title}}
     </p>
 
+    <!-- during editing the title of task the input is shown instead of plain text -->
+    <!-- save changes by clicking enter -->
+    <input v-else
+              type="text"
+              v-model="newTitle"
+              class="border px-1 rounded col-span-9 resize-y"
+              @keyup.enter="toggleEdit"
+    />
+
     <!-- Edit button -->
-    <button class="col-span-1 rounded-md py-3 flex flex-col items-center justify-center
-                hover:bg-neutral-300">
-      <PencilIcon class="w-5 h-5"></PencilIcon>
+    <button class="col-span-1 rounded-md py-3 flex
+                   flex-col items-center justify-center
+                 hover:bg-neutral-300"
+                   @click="toggleEdit"
+    >
+      <PencilIcon v-if="!isEditing" class="w-5 h-5" />
+      <CheckIcon v-else class="w-5 h-5" />
     </button>
 
     <!-- Delete button -->
