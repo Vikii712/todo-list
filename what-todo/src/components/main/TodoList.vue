@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TodoItem from "./list/TodoItem.vue";
 import { useTodoStore } from "../../stores/todo.ts";
+import Spinner from "./list/Spinner.vue";
 
 const todoStore = useTodoStore();
 
@@ -16,8 +17,15 @@ const todoStore = useTodoStore();
       <span>Delete</span>
     </div>
 
+    <div
+        v-if="todoStore.loading"
+        class="flex justify-center items-center p-8"
+    >
+      <Spinner/>
+    </div>
+
     <!-- List items -->
-    <ul v-if="todoStore.pageTodos.length !== 0" class="mt-3 space-y-3">
+    <ul v-else-if="todoStore.pageTodos.length !== 0" class="mt-3 space-y-3">
       <TodoItem
           v-for="todo in todoStore.pageTodos"
           :todo="todo"

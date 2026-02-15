@@ -63,7 +63,6 @@ export const useTodoStore = defineStore('todos', () => {
     const pageTodos = computed(() => {
         const start = (currentPage.value - 1) * perPage
         const end = start + perPage
-        console.log("haha:", selectedTodos.value.slice(start, end))
         return selectedTodos.value.slice(start, end)
     })
 
@@ -79,10 +78,10 @@ export const useTodoStore = defineStore('todos', () => {
         }
     }
 
-
     //load task list from localStorage or fetch from api (if not available in localStorage)
     async function loadTodos(): Promise<void> {
         loading.value = true
+
         const storedTodos = localStorage.getItem('todos')
 
         // localStorage.getItem returns null if empty, then fetch the data
