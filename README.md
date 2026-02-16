@@ -35,7 +35,7 @@ You can view the app through GithubPages here: [WhatTodo](https://vikii712.githu
 
 Or you can choose between  [Node](#option-1-local-development-with-npm) and [Docker](#option-2-docker-deployment) setup.
 
-
+---
 
 ### Option 1: Local run with npm
 
@@ -62,6 +62,8 @@ npm run dev
 The application will be available at **http://localhost:5173**
 
 
+---
+
 ### Option 2: Docker Deployment
 
 #### Prerequisites
@@ -81,6 +83,7 @@ docker-compose up --build
 
 The application will be available at **http://localhost:8080**
 
+---
 
 ## Project Structure
 
