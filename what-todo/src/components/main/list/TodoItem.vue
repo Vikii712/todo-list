@@ -61,6 +61,7 @@ function escapeEdit(): void {
         class="w-5 h-5 accent-green-500"
         :checked="props.todo.completed"
         @click="todoStore.toggleCompleted(props.todo.id)"
+        aria-label="Mark task as completed"
     />
 
     <!-- Task title, crossed out if completed -->
@@ -89,6 +90,7 @@ function escapeEdit(): void {
                    flex-col items-center justify-center
                  hover:bg-neutral-300"
                    @click="toggleEdit"
+                  :aria-label="isEditing ? 'Save task' : 'Edit task'"
     >
       <PencilIcon v-if="!isEditing" class="w-5 h-5" />
       <CheckIcon v-else class="w-5 h-5" />
@@ -99,6 +101,7 @@ function escapeEdit(): void {
                   flex-col items-center justify-center
                 hover:bg-neutral-300"
             @click="deleteModal = true"
+            aria-label="Delete task"
     >
       <TrashIcon class="w-5 h-5"></TrashIcon>
     </button>
