@@ -4,7 +4,7 @@
 
 <template>
   <header class="text-center">
-    <h1 class="font-bold text-5xl pb-5 pt-3">WhatTodo</h1>
+    <h1 class="font-semibold text-6xl pb-6 pt-4">WhatTodo</h1>
   </header>
 </template>
 
