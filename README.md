@@ -33,7 +33,11 @@ Simple, responsive frontend todo application build with Vue 3, Typescript and Pi
 ---
 
 ## Setup Instructions
-You can choose between  [Node](#option-1-local-development-with-npm) and [Docker](#option-2-docker-deployment) run.
+
+You can view the app through GithubPages here: [WhatTodo](https://vikii712.github.io/todo-list/)
+
+
+Or you can choose between  [Node](#option-1-local-development-with-npm) and [Docker](#option-2-docker-deployment) setup.
 
 
 ---

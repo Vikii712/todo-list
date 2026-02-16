@@ -8,5 +8,5 @@ export default defineConfig({
       vue(),
       tailwindcss(),
   ],
-    base: '/what-todo/'
+    base: '/todo-list/'
 })
