@@ -15,7 +15,6 @@ Simple, responsive frontend todo application build with Vue 3, Typescript and Pi
 - Implements keyboard shortcuts like double-click, Enter and Esc for faster editing
 - Shows loading icon during API calls
 
----
 
 ## Technologies used
 
@@ -28,9 +27,6 @@ Simple, responsive frontend todo application build with Vue 3, Typescript and Pi
 - **Docker and Docker Compose** - containerization, portability
 - **Node.js** (developed with v22.14.0)
 
----
-
----
 
 ## Setup Instructions
 
@@ -40,7 +36,6 @@ You can view the app through GithubPages here: [WhatTodo](https://vikii712.githu
 Or you can choose between  [Node](#option-1-local-development-with-npm) and [Docker](#option-2-docker-deployment) setup.
 
 
----
 
 ### Option 1: Local run with npm
 
@@ -66,7 +61,6 @@ npm run dev
 
 The application will be available at **http://localhost:5173**
 
----
 
 ### Option 2: Docker Deployment
 
@@ -87,9 +81,6 @@ docker-compose up --build
 
 The application will be available at **http://localhost:8080**
 
----
-
----
 
 ## Project Structure
 
@@ -115,7 +106,6 @@ what-todo/
 └── README.md              
 ```
 
----
 
 ## Design decisions and trade-offs
 
